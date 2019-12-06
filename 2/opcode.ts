@@ -1,9 +1,14 @@
 import * as fs from 'fs';
+import { strict } from 'assert';
 
-function partOne(filename: string){
+function partOne(filename: string, noun: number, verb: number){
     var inputs = fs.readFileSync(filename, 'utf8').toString()
         .split(',')
         .map(s => parseInt(s, 10));
+
+    //Set Program Parameters
+    inputs[1] = noun;
+    inputs[2] = verb;
 
     var first_operand_index = (i: number) => inputs[i + 1];
     var second_operand_index = (i: number) => inputs[i + 2];
@@ -32,5 +37,23 @@ function partOne(filename: string){
     }
 }
 
+function partTwo(target: number){
+
+    //Perform brute force search
+    for(var noun=0; noun<100; noun++){
+        for(var verb=0; verb<100; verb++){
+            
+            var result = partOne('input.txt', noun, verb);
+            if(result == target){
+                console.log('Part 2 noun' + String(noun));
+                console.log('Part 2 verb' + String(verb));
+            }
+        }
+    }
+}
+
 //console.log(partOne('test.txt'));
-console.log(partOne('input.txt'));
+
+//Part one doesnt set parameters since I set them in input
+console.log('Part One: ' + partOne('input.txt', 12, 2));
+partTwo(19690720);
