@@ -29,13 +29,13 @@ export function noDec(n: number){
     return true
 }
 
-function partOne(current: number, limit: number) {
+function partOne(current: number, limit: number, test: (curr: number) => boolean) {
     
     var total_possible = 0
 
     while(current <= limit){
     
-        if(noDec(current) && adj(current)){
+        if(test(current)){
             total_possible++
         }
         current++
@@ -44,4 +44,6 @@ function partOne(current: number, limit: number) {
     return total_possible
 }
 
-console.log('Part One: ' + partOne(134564, 585159))
+//Possible Answers are noDescending and at least 2 adjacent
+var partOnePredicate = n => noDec(n) && adj(n)
+console.log('Part One: ' + partOne(134564, 585159, partOnePredicate))
