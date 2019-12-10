@@ -1,6 +1,7 @@
 **/*.js
 test/
 *.txt
+*.csv
 
 # Logs
 logs
